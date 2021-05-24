@@ -1,7 +1,7 @@
 # AR-Guncrafting
 A Qbus-Based Guncrafting Revamped from the Basic Qbus Crafting.
 
-Add this to your Inventory script config file -
+Add this to your Inventory Script config.lua file -
 
 ```Config.gunCrafting = {
     ["location"] = {x = 905.83, y = -3230.74, z = -98.29, h = 185.54, r = 1.0},
