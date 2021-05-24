@@ -3,7 +3,7 @@ A Qbus-Based Guncrafting Revamped from the Basic Qbus Crafting.
 
 Add this to your Inventory script config file -
 
-Config.gunCrafting = {
+```Config.gunCrafting = {
     ["location"] = {x = 905.83, y = -3230.74, z = -98.29, h = 185.54, r = 1.0},
     ["list"] = {x = 908.61, y = -3207.35, z = -97.01, h = 203.63, r = 1.0},
     ["items"] = {
@@ -57,4 +57,4 @@ Config.gunCrafting = {
             points = 1,
         },
     }
-}
+}```
