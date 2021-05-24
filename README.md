@@ -64,5 +64,5 @@ Just Start the resource the Server.cfg -- start AR-Guncrafting**
     }
 }
 ```
-**Note -**Whatever you change/update in the config.lua file, make sure to change/update it on the Inventory's config,lua file.
+**Note -** Whatever you change/update in the config.lua file, make sure to change/update it on the Inventory's config,lua file.
 
