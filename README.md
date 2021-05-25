@@ -2,9 +2,8 @@
 A Qbus-Based Guncrafting Revamped from the Basic Qbus Crafting.
 _Plug and Play Script !!_
 
-**You can configure all the location and customise all the items as per you convinence. Everthing you need to edit is in the Config.lua**
-**
-Just Start the resource the Server.cfg -- start AR-Guncrafting**
+**You can configure all the location and customise all the items as per your needs. Everthing you need to edit is in the Config.lua**
+**Just Start the resource in Server.cfg -- start AR-Guncrafting**
 
 **Add this to your Inventory Script config.lua file -**
 
