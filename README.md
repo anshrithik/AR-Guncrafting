@@ -63,5 +63,75 @@ _Plug and Play Script !!_
     }
 }
 ```
+**Add this to your Inventory Script client side file (around line 500) -**
+```
+RegisterNetEvent('inventory:client:Craftgun')
+AddEventHandler('inventory:client:Craftgun', function(itemName, itemCosts, amount, toSlot, points)
+    SendNUIMessage({
+        action = "close",
+    })
+    isCrafting = true
+    QBCore.Functions.Progressbar("repair_vehicle", "Crafting..", (math.random(20000, 50000) * amount), false, true, {
+        disableMovement = true,
+        disableCarMovement = true,
+        disableMouse = false,
+        disableCombat = true,
+    }, {
+        animDict = "mini@repair",
+        anim = "fixing_a_player",
+        flags = 16,
+    }, {}, {}, function() -- Done
+        StopAnimTask(GetPlayerPed(-1), "mini@repair", "fixing_a_player", 1.0)
+        TriggerServerEvent("inventory:server:Craftgun", itemName, itemCosts, amount, toSlot, points)
+        TriggerEvent('inventory:client:ItemBox', QBCore.Shared.Items[itemName], 'add')
+      
+        isCrafting = false
+    end, function() -- Cancel
+        StopAnimTask(GetPlayerPed(-1), "mini@repair", "fixing_a_player", 1.0)
+        QBCore.Functions.Notify("Canceled!", "error")
+        isCrafting = false
+    end)
+end)
+```
+**Add this to your Inventory Script server side file -**
+(around line 65)
+```
+RegisterServerEvent('inventory:server:Craftgun')
+AddEventHandler('inventory:server:Craftgun', function(itemName, itemCosts, amount, toSlot, points)
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+    local amount = tonumber(amount)
+    if itemName ~= nil and itemCosts ~= nil then
+        for k, v in pairs(itemCosts) do
+            Player.Functions.RemoveItem(k, (v*amount))
+        end
+        Player.Functions.AddItem(itemName, amount, toSlot)
+        Player.Functions.SetMetaData("guncraftingrep", Player.PlayerData.metadata["guncraftingrep"]+(points*amount))
+        TriggerClientEvent("inventory:client:UpdatePlayerInventory", src, false)
+    end
+end)
+```
+(around line 273)
+```
+elseif name == "gun_crafting" then
+                secondInv.name = "gun_crafting"
+                secondInv.label = other.label
+                secondInv.maxweight = 900000
+                secondInv.inventory = other.items
+                secondInv.slots = #other.items
+```
+(around line 899)
+```
+elseif fromInventory == "gun_crafting" then
+        local itemData = Config.gunCrafting["items"][fromSlot]
+        if hasCraftItems(src, itemData.costs, fromAmount) then
+            TriggerClientEvent("inventory:client:Craftgun", src, itemData.name, itemData.costs, fromAmount, toSlot, itemData.points)
+        else
+            TriggerClientEvent("inventory:client:UpdatePlayerInventory", src, true)
+            TriggerClientEvent('QBCore:Notify', src, "You don't have the right items..", "error")
+        end	
+	else
+```
+
 **Note -** Whatever you change/update in the config.lua file, make sure to change/update it on the Inventory's config,lua file.
 
