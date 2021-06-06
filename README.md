@@ -94,6 +94,7 @@ AddEventHandler('inventory:client:Craftgun', function(itemName, itemCosts, amoun
 end)
 ```
 **Add this to your Inventory Script server side file -**
+
 (around line 65)
 ```
 RegisterServerEvent('inventory:server:Craftgun')
