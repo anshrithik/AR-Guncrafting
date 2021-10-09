@@ -19,7 +19,6 @@ Citizen.CreateThread(function()
 	end
 	SetupgunItemsInfo()
 end)
---PlayerJob = {}
 
 function DrawText3D(x, y, z, text)
 	SetTextScale(0.35, 0.35)
@@ -90,7 +89,6 @@ Citizen.CreateThread(function()
 	if distance < 10 then
 		inRange = true
 		if distance < 1.5 then
-			--if PlayerJob.name == "mechanic" then 
 			    DrawText3D(Config.gunCrafting["location"].x, Config.gunCrafting["location"].y, Config.gunCrafting["location"].z, "~g~E~w~ - Gun Crafting")
 				if IsControlJustPressed(0, Keys["E"]) then
 					local crafting = {}
@@ -98,7 +96,6 @@ Citizen.CreateThread(function()
 					crafting.items = GetgunThresholdItems()
 					TriggerServerEvent("inventory:server:OpenInventory", "gun_crafting", math.random(1, 99), crafting)
 				end
-			--end
 		end
 	end
 
@@ -153,16 +150,3 @@ function GetgunThresholdItems()
 	end
 	return items
 end
-
---[[RegisterNetEvent('QBCore:Client:OnPlayerLoaded')
-AddEventHandler('QBCore:Client:OnPlayerLoaded', function()
-    QBCore.Functions.GetPlayerData(function(PlayerData)
-        PlayerJob = PlayerData.job
-    end)
-    isLoggedIn = true
-end)
-
-RegisterNetEvent('QBCore:Client:OnJobUpdate')
-AddEventHandler('QBCore:Client:OnJobUpdate', function(JobInfo)
-    PlayerJob = JobInfo
-end)]]
